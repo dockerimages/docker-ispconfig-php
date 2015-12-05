@@ -4,6 +4,7 @@ FROM ubuntu:15.10
 
 MAINTAINER Frank Lemanschik <frank@dspeed.eu>
 ENV PHP_VERSION 5.4.45
+ENV PHP_HASH 185f67f1ca652b18bc0cca9d7edbde7c
 ENV XCACHE_VERSION 3.2.0
 ENV XCACHE_HASH 3655bd20483dc23d24f87f9dc924a62e
 
@@ -33,7 +34,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h
 RUN mkdir -p /tmp/install/ && \
     cd /tmp/install && \
     wget http://de2.php.net/distributions/php-${PHP_VERSION}.tar.bz2 && \
-    echo "017f7ba7484e738c88bf19eec4369d78  php-${PHP_VERSION}.tar.bz2" > md5sums && \
+    echo "${PHP_HASH}  php-${PHP_VERSION}.tar.bz2" > md5sums && \
     md5sum -c md5sums && \
     tar xfj php-${PHP_VERSION}.tar.bz2 && \
     cd php-${PHP_VERSION} && \
