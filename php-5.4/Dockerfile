@@ -15,7 +15,7 @@ RUN apt-get update \
 		libreadline6-dev librecode-dev libsqlite3-dev libssl-dev libxml2-dev \
         libpng-dev libmcrypt-dev libmcrypt4 libmhash-dev libmysqlclient-dev libpspell-dev \
         libjpeg-dev zlib1g-dev libfreetype6-dev libfontconfig1-dev libgmp-dev \
-        libgpg-error-dev uuid-dev libt1-dev libsnmp-dev libc-client2007e-dev \
+        libgpg-error-dev uuid-dev libsnmp-dev libc-client2007e-dev \
         libaspell-dev libbz2-dev libc-client2007e-dev flex bison libsqlite3-dev libpq-dev \
         libcurl4-openssl-dev libmagickwand-dev libgd2-xpm-dev autoconf imagemagick \
         graphicsmagick libdb-dev libtidy-dev libxslt-dev libgeoip-dev libicu-dev spawn-fcgi re2c \
