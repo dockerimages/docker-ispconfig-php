@@ -18,8 +18,7 @@ RUN apt-get update \
         libgpg-error-dev uuid-dev libsnmp-dev libc-client2007e-dev \
         libaspell-dev libbz2-dev libc-client2007e-dev flex bison libsqlite3-dev libpq-dev \
         libcurl4-openssl-dev libmagickwand-dev libgd2-xpm-dev autoconf imagemagick \
-        graphicsmagick libdb-dev libtidy-dev libxslt-dev libgeoip-dev libicu-dev spawn-fcgi re2c \
-    && rm /var/lib/apt/lists/*_*
+        graphicsmagick libdb-dev libtidy-dev libxslt-dev libgeoip-dev libicu-dev spawn-fcgi re2c
 
 # Ubuntu Fixes to compile
 ## Copy libc-client to x86_64-dir
