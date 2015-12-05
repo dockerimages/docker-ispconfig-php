@@ -69,8 +69,6 @@ RUN mkdir -p /tmp/install/ && \
         --with-mysql \
         --with-gd \
         --enable-gd-native-ttf  \
-        --with-imap \
-        --with-imap-ssl \
         --with-ldap \
         --with-mcrypt \
         --with-mhash  \
@@ -87,7 +85,6 @@ RUN mkdir -p /tmp/install/ && \
         --enable-ftp \
         --with-gettext \
         --enable-mbstring \
-        --with-kerberos \
         --enable-intl \
         --with-pgsql \
         --with-pdo-mysql  \
