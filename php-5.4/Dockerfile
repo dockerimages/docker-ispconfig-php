@@ -1,20 +1,25 @@
 # Based on ubuntu 14.04
-FROM ubuntu:trusty
+FROM ubuntu:15.10
 
-MAINTAINER Christian Simon <simon@swine.de>
+
+MAINTAINER Frank Lemanschik <frank@dspeed.eu>
+ENV PHP_VERSION 5.4.45
+ENV XCACHE_VERSION 3.2.0
+ENV XCACHE_HASH 3655bd20483dc23d24f87f9dc924a62e
+
+
 
 # Update everything & install prequesites
-RUN apt-get update &&  \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget bzip2 \
+RUN apt-get update \
+    && apt-get -y install build-essential wget bzip2 \
+		libreadline6-dev librecode-dev libsqlite3-dev libssl-dev libxml2-dev \
         libpng-dev libmcrypt-dev libmcrypt4 libmhash-dev libmysqlclient-dev libpspell-dev \
         libjpeg-dev zlib1g-dev libfreetype6-dev libfontconfig1-dev libgmp-dev \
         libgpg-error-dev uuid-dev libt1-dev libsnmp-dev libc-client2007e-dev \
         libaspell-dev libbz2-dev libc-client2007e-dev flex bison libsqlite3-dev libpq-dev \
         libcurl4-openssl-dev libmagickwand-dev libgd2-xpm-dev autoconf imagemagick \
-        graphicsmagick libdb-dev libtidy-dev libxslt-dev libgeoip-dev libicu-dev spawn-fcgi re2c && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade && \
-    apt-get clean && \
-    rm /var/lib/apt/lists/*_*
+        graphicsmagick libdb-dev libtidy-dev libxslt-dev libgeoip-dev libicu-dev spawn-fcgi re2c \
+    && rm /var/lib/apt/lists/*_*
 
 # Ubuntu Fixes to compile
 ## Copy libc-client to x86_64-dir
@@ -25,7 +30,7 @@ RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h
 
 
 # Download PHP
-ENV PHP_VERSION 5.4.39
+
 RUN mkdir -p /tmp/install/ && \
     cd /tmp/install && \
     wget http://de2.php.net/distributions/php-${PHP_VERSION}.tar.bz2 && \
@@ -34,16 +39,22 @@ RUN mkdir -p /tmp/install/ && \
     tar xfj php-${PHP_VERSION}.tar.bz2 && \
     cd php-${PHP_VERSION} && \
     ./configure \
-        --enable-cgi \
+        --disable-cgi \
+        --enable-fpm \
+        --with-fpm-user=www-data \
+        --with-fpm-group=www-data
         --with-config-file-path=/etc/php5 \
         --with-config-file-scan-dir=/etc/php5/conf.d \
         --with-libdir=lib/x86_64-linux-gnu \
         --with-mcrypt \
-        --with-zlib \
-        --with-curl \
         --disable-debug \
         --disable-rpath \
         --enable-inline-optimization \
+        --enable-mysqlnd \
+		--with-curl \
+		--with-openssl \
+		--with-readline \
+		--with-recode \
         --with-bz2 \
         --with-zlib \
         --enable-sockets \
@@ -78,7 +89,6 @@ RUN mkdir -p /tmp/install/ && \
         --with-gettext \
         --enable-mbstring \
         --with-kerberos \
-        --with-openssl \
         --enable-intl \
         --with-pgsql \
         --with-pdo-mysql  \
@@ -86,12 +96,11 @@ RUN mkdir -p /tmp/install/ && \
         --with-tidy \
         --with-xsl \
         --with-gmp \
-        --with-pspell && \
-    make -j 4 && \
-    make install && \
-    rm -rf /tmp/install
+        --with-pspell \
+    && make -j 4 \
+    && make install \
+    && rm -rf /tmp/install
 
-# Create config directory
 RUN mkdir -p /etc/php5/conf.d/
 
 # Set location and timestamp
@@ -111,14 +120,14 @@ RUN mkdir -p /tmp/install/ && \
     make install && \
     rm -rf /tmp/install
 
-# Build module xcache 3.10
+# Build module xcache
 RUN mkdir -p /tmp/install/ && \
     cd /tmp/install && \
-    wget http://xcache.lighttpd.net/pub/Releases/3.1.0/xcache-3.1.0.tar.bz2 && \
-    echo "e5816d47d52be200b959bf69a673ff74  xcache-3.1.0.tar.bz2" > md5sums && \
+    wget http://xcache.lighttpd.net/pub/Releases/${XCACHE_VERSION}/xcache-${XCACHE_VERSION}.tar.bz2 && \
+    echo "${XCACHE_HASH}  xcache-${XCACHE_VERSION}.tar.bz2" > md5sums && \
     md5sum -c md5sums && \
-    tar xfj xcache-3.1.0.tar.bz2 && \
-    cd xcache-3.1.0 && \
+    tar xfj xcache-${XCACHE_VERSION}.tar.bz2 && \
+    cd xcache-${XCACHE_VERSION} && \
     phpize && \
     ./configure && \
     make && \
@@ -168,3 +177,4 @@ RUN mkdir -p /tmp/install/ && \
     make SMTP_HOST=172.17.42.1 && \
     cp -v mini_sendmail /usr/sbin/sendmail && \
     rm -rf /tmp/install
+CMD []
