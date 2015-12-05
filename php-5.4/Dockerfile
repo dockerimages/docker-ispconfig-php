@@ -42,7 +42,7 @@ RUN mkdir -p /tmp/install/ && \
         --disable-cgi \
         --enable-fpm \
         --with-fpm-user=www-data \
-        --with-fpm-group=www-data
+        --with-fpm-group=www-data \
         --with-config-file-path=/etc/php5 \
         --with-config-file-scan-dir=/etc/php5/conf.d \
         --with-libdir=lib/x86_64-linux-gnu \
