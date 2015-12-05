@@ -40,55 +40,50 @@ RUN mkdir -p /tmp/install/ && \
     cd php-${PHP_VERSION} && \
     ./configure \
         --disable-cgi \
-        --enable-fpm \
-        --with-fpm-user=www-data \
-        --with-fpm-group=www-data \
-        --with-config-file-path=/etc/php5 \
-        --with-config-file-scan-dir=/etc/php5/conf.d \
-        --with-libdir=lib/x86_64-linux-gnu \
-        --with-mcrypt \
         --disable-debug \
         --disable-rpath \
+        --enable-fpm \
         --enable-inline-optimization \
         --enable-mysqlnd \
-		--with-curl \
-		--with-openssl \
-		--with-readline \
-		--with-recode \
-        --with-bz2 \
-        --with-zlib \
         --enable-sockets \
         --enable-sysvsem  \
         --enable-sysvshm \
         --enable-pcntl \
         --enable-mbregex \
-        --with-mhash \
-        --enable-zip  \
+        --enable-zip \
+        --enable-gd-native-ttf \
+        --enable-bcmath \
+        --enable-ctype \
+        --enable-exif \
+        --enable-ftp \
+        --enable-mbstring \
+        --enable-intl \
+        --enable-soap \
+        --with-fpm-user=www-data \
+        --with-fpm-group=www-data \
+        --with-config-file-path=/etc/php5 \
+        --with-config-file-scan-dir=/etc/php5/conf.d \
+        --with-libdir=lib/x86_64-linux-gnu \
+        --with-curl \
+	--with-openssl \
+	--with-readline \
+	--with-recode \
+        --with-bz2 \
+        --with-zlib \
         --with-pcre-regex \
         --with-mysqli  \
         --with-mysql \
         --with-gd \
-        --enable-gd-native-ttf  \
-        --with-ldap \
         --with-mcrypt \
         --with-mhash  \
         --with-snmp=shared \
-        --enable-ctype \
         --with-freetype-dir=shared,/usr  \
         --with-jpeg-dir=/usr  \
-        --enable-bcmath \
-        --with-bz2 \
-        --enable-ctype \
         --with-db4 \
         --with-iconv  \
-        --enable-exif \
-        --enable-ftp \
         --with-gettext \
-        --enable-mbstring \
-        --enable-intl \
         --with-pgsql \
         --with-pdo-mysql  \
-        --enable-soap  \
         --with-tidy \
         --with-xsl \
         --with-gmp \
