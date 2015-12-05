@@ -78,7 +78,6 @@ RUN mkdir -p /tmp/install/ && \
         --enable-ctype \
         --with-freetype-dir=shared,/usr  \
         --with-jpeg-dir=/usr  \
-        --with-t1lib=/usr  \
         --enable-bcmath \
         --with-bz2 \
         --enable-ctype \
