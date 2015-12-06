@@ -130,7 +130,7 @@ RUN echo "extension=propro.so\nextension=raphf.so\nextension=http.so" > /etc/php
 
 RUN pecl install channel://pecl.php.net/xdebug-2.2.5
 
-RUN pecl install channel://pecl.php.net/imagick-3.2.0RC1
+RUN pecl install channel://pecl.php.net/imagick-3.3.0
 RUN echo "extension=imagick.so" > /etc/php5/conf.d/30_imagick.ini
 
 RUN pecl install channel://pecl.php.net/apc-3.1.13
